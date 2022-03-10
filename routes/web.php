@@ -2,7 +2,14 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
+
+/*
+DB::listen(function($query){
+    var_dump($query->sql);
+});
+*/
 
 Route::view('/', 'home') -> name('home');
 
@@ -11,6 +18,9 @@ Route::view('/quienes-somos', 'about') -> name('about');
 Route::resource('/proyecto', ProjectController::class)
     -> parameters(['proyecto' => 'project'])
     -> names('projects');
+
+
+Route::get('/categorias/{category}', [CategoryController::class, 'show']) -> name('categories.show');
 
 /*
 Route::get('/proyecto', [ProjectController::class, 'index']) -> name('projects.index');
